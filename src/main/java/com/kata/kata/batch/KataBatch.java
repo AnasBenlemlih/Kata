@@ -41,7 +41,7 @@ public class KataBatch implements CommandLineRunner {
         }
     }
 
-    private void processFile(String inputFilePath) {
+    void processFile(String inputFilePath) {
         Path input = Paths.get(inputFilePath);
 
         // vérification si le fichier existe
