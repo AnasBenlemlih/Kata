@@ -35,6 +35,11 @@ public class KataService {
             }
         }
 
+        // cas de aucune règle n'est vérifiee.
+        if (result.length() == 0) {
+            result.append(number);
+        }
+
         return result.toString();
 
     }
