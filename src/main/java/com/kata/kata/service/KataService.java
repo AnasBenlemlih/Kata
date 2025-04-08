@@ -25,13 +25,15 @@ public class KataService {
         // règle si contient un chiffre
 
         String numberAsString = String.valueOf(number);
+
         for (char x : numberAsString.toCharArray()) {
-            if (x == '3'){
-                result.append(FOO);
-            } else if (x == '5'){
-                result.append(BAR);
-            } else if (x == '7'){
-                result.append(QUIX);
+            switch (x) {
+                case '3' -> result.append(FOO);
+                case '5' -> result.append(BAR);
+                case '7' -> result.append(QUIX);
+                default -> {
+                    //  rien à faire
+                }
             }
         }
 
