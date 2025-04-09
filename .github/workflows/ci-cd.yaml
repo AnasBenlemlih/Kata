@@ -1,4 +1,4 @@
-name: Gestion ART - CI/CD
+name: simple - CI/CD
 
 on:
   push:
