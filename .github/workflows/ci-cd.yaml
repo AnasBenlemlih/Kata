@@ -1,4 +1,4 @@
-name: simple - CI/CD
+name: Java CI/CD avec Maven
 
 on:
   push:
@@ -19,5 +19,56 @@ jobs:
           java-version: '17'
           cache: 'maven'
 
+      - name: Donner les permissions d'exécution au mvnw
+        run: chmod +x ./mvnw
+
       - name: Exécution des tests
         run: ./mvnw clean test
+
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - name: Checkout du code
+        uses: actions/checkout@v3
+
+      - name: Configuration de Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          cache: 'maven'
+
+      - name: Donner les permissions d'exécution au mvnw
+        run: chmod +x ./mvnw
+
+      - name: Construction du projet
+        run: ./mvnw clean package -DskipTests
+
+      - name: Archive des artefacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: application-jar
+          path: target/*.jar
+          retention-days: 3
+
+  deploy:
+    name: Déploiement
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Checkout du code
+        uses: actions/checkout@v3
+
+      - name: Téléchargement des artefacts
+        uses: actions/download-artifact@v3
+        with:
+          name: application-jar
+          path: target/
+
+      - name: Déploiement
+        run: |
+          echo "Déploiement de l'application"
+          ls -la target/
+          echo "L'application a été déployée avec succès!"
