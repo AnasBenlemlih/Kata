@@ -2,7 +2,7 @@ name: simple - CI/CD
 
 on:
   push:
-    branches: [ main ]
+    branches: [ master ]
 
 jobs:
   test:
