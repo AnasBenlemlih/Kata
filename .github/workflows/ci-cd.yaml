@@ -62,7 +62,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Téléchargement des artefacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: application-jar
           path: target/
